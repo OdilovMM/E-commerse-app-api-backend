@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const Cart = require("../models/Cart");
-const Product = require("../models/Product");
 const {
   verifyToken,
   verifyTokenAndAdmin,
@@ -50,7 +49,7 @@ router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
 // GET USER CART
 router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
   try {
-    const Cart = await Cart.find({ userId: req.params.userId });
+    const cart = await Cart.find({ userId: req.params.userId });
 
     res.status(200).json(cart);
   } catch (err) {
@@ -58,7 +57,7 @@ router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
   }
 });
 
-// GET ALL PRODUCTS
+// GET ALL CART
 
 router.get("/", verifyTokenAndAdmin, async (req, res) => {
   try {
